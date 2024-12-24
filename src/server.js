@@ -39,7 +39,7 @@ app.post('/api/products', async (req, res) => {
   }
 });
 
-app.put('api/products/:pid', async (req, res) => {
+app.put('/api/products/:pid', async (req, res) => {
   const id = req.params.pid;
   const { title, description, code, price, status, category, stock, thumbnails } = req.body;
 

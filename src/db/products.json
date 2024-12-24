@@ -1,0 +1,32 @@
+[
+  {
+    "id": "9deeb904-786d-4670-99c9-379735f9f4be",
+    "title": "Mesa",
+    "description": "Mesa dominguera de 6 puestos",
+    "code": "MESA79",
+    "price": 29500,
+    "status": true,
+    "category": "Muebles",
+    "stock": 0
+  },
+  {
+    "id": "cee33c51-e864-4648-824e-82e309c884a7",
+    "title": "Silla",
+    "description": "Silla alta para bar",
+    "code": "SILL03",
+    "price": 7200,
+    "status": true,
+    "category": "Muebles",
+    "stock": 0
+  },
+  {
+    "id": "2df0f1b4-08c8-4daf-9623-eb3340bd86c5",
+    "title": "Silla",
+    "description": "Silla para mesa de lujo",
+    "code": "SILL96",
+    "price": 12200,
+    "status": true,
+    "category": "Muebles",
+    "stock": 0
+  }
+]

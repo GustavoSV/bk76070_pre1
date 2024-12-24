@@ -29,7 +29,7 @@ class ProductManager {
    * 
    * @returns - Retorna todos los productos
    */
-  getProducts() {
+  async getProducts() {
     return this.products;
   }
 
@@ -38,17 +38,20 @@ class ProductManager {
    * @param {id} id - Id del producto a buscar   
    * @returns Producto encontrado
    */
-  getProductById({ id }) {
+  async getProductById({ id }) {
     const product = this.products.find(product => product.id === id);
     return product;
   }
 
   async createProduct({ title, description, code, price, status, category, stock, thumbnails }) {
-
-    if (!title || !description || !code || !price || !category || !stock) {
+    
+    if (!title || !description || !code || !category) {     
       throw new Error('Faltan datos. Debe al menos completar los campos de título, descripción, code, precio, categoria y stock');
     }
-
+    if (isNaN(Number(price)) || isNaN(Number(stock))) {
+      throw new Error('El precio y el stock deben ser números');
+    }
+    
     const id = uuid();
     if (this.products.some(product => product.id === id)) {
       throw new Error('Error interno. Se ha creado 2 veces el mismo id');
@@ -59,10 +62,10 @@ class ProductManager {
       title,
       description,
       code,
-      price,
+      price: Number(price),
       status: status || true,
       category,
-      stock,
+      stock: Number(stock),
       thumbnails
     };
 
@@ -129,4 +132,4 @@ class ProductManager {
   }
 }
 
-export const productManager = new ProductManager({ path: './src/data/products.json' });
+export const productManager = new ProductManager({ path: './src/db/products.json' });
