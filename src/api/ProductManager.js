@@ -1,4 +1,3 @@
-import { log } from 'node:console';
 import fs from 'node:fs';
 import { v4 as uuid } from 'uuid';
 
@@ -43,6 +42,19 @@ class ProductManager {
     return product;
   }
 
+  /**
+   * 
+   * @param {title, description, code, price, status, category, stock, thumbnails} 
+   * title - Título del producto
+   * description - Descripción del producto
+   * code - Código del producto
+   * price - Precio del producto
+   * status - Estado del producto
+   * category - Categoría del producto
+   * stock - Stock del producto
+   * thumbnails - Array con Imágenes del producto
+   * @returns el producto creado
+   */
   async createProduct({ title, description, code, price, status, category, stock, thumbnails }) {
     
     if (!title || !description || !code || !category) {     
@@ -54,7 +66,7 @@ class ProductManager {
     
     const id = uuid();
     if (this.products.some(product => product.id === id)) {
-      throw new Error('Error interno. Se ha creado 2 veces el mismo id');
+      throw new Error('Error interno. Se ha creado 2 veces el mismo pid');
     }
 
     const product = {
@@ -78,6 +90,20 @@ class ProductManager {
     }
   }
 
+  /**
+   * 
+   * @param {id, title, description, code, price, status, category, stock, thumbnails} 
+   * id - Id del producto a modificar
+   * title - Título del producto
+   * description - Descripción del producto
+   * code - Código del producto
+   * price - Precio del producto
+   * status - Estado del producto
+   * category - Categoría del producto
+   * stock - Stock del producto
+   * thumbnails - Array con Imágenes del producto 
+   * @returns el producto modificado
+   */
   async updateProduct({ id, title, description, code, price, status, category, stock, thumbnails }) {
     const product = this.products.find(product => product.id === id);
 
@@ -105,6 +131,11 @@ class ProductManager {
     }
   }
 
+  /**
+   * 
+   * @param {id} id - Id del producto a eliminar 
+   * @returns 
+   */
   async deleteProduct({ id }) {
     const product = this.products.find(product => product.id === id);
 
@@ -127,7 +158,7 @@ class ProductManager {
     try {
       await fs.promises.writeFile(this.path, JSON.stringify(this.products, null, 2));
     } catch (error) {
-      console.log('Error al guardar el archivo', error);
+      console.log('Error al guardar el archivo de products', error);
     }
   }
 }
